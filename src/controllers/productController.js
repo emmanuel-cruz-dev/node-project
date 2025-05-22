@@ -5,8 +5,14 @@ import {
 } from "../services/apiService.js";
 
 export const getAllProducts = async (req, res) => {
-  const products = await fetchAllProducts();
-  res.send({ status: "OK", data: products });
+  try {
+    const products = await fetchAllProducts();
+    res.send({ status: "OK", data: products });
+  } catch (error) {
+    res
+      .status(error?.status || 500)
+      .send({ status: "FAILED", data: { error: error?.message || error } });
+  }
 };
 
 export const getOneProduct = async (req, res) => {
@@ -39,6 +45,13 @@ export const createOneProduct = async (req, res) => {
   }
 };
 
-export const deleteProduct = (req, res) => {
-  res.send(`Delete product ${req.params.productId}`);
+export const deleteProduct = async (req, res) => {
+  const products = await fetchAllProducts();
+  const { productId } = req.params;
+  const productIndex = products.findIndex(
+    (product) => product.id === productId
+  );
+
+  products.splice(productIndex, 1);
+  res.send(`Delete product ${productId}`);
 };
