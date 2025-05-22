@@ -90,9 +90,10 @@ export const deleteOneProduct = async (req, res) => {
   try {
     const result = await deleteProductById(productId);
 
-    res.status(204).send({
+    res.status(200).send({
       status: "OK",
-      data: result,
+      data: result.data,
+      message: result.message,
     });
   } catch (error) {
     console.error("Error in deleteOneProduct:", error.message);

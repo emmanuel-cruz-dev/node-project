@@ -68,10 +68,12 @@ export const deleteProductById = async (productId) => {
       throw new Error(`Error deleting product: ${response.statusText}`);
     }
 
+    const deletedProduct = await response.json();
+
     return {
       status: "SUCCESS",
-      data: response,
-      message: "Product deleted successfully",
+      data: deletedProduct,
+      message: `Product ID:${deletedProduct.id} deleted successfully`,
     };
   } catch (error) {
     console.error("Error in deleteProductById", error.message);
