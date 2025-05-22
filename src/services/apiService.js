@@ -1,11 +1,12 @@
-const API_BASE_URL = "https://fakestoreapi.com";
+const API_BASE_URL = "https://fakestoreapi.com/products";
 
 export const fetchAllProducts = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}/products`);
+    const response = await fetch(`${API_BASE_URL}`);
     if (!response.ok) {
       throw new Error(`Error fetching products: ${response.statusText}`);
     }
+
     return await response.json();
   } catch (error) {
     console.error(error);
@@ -15,13 +16,44 @@ export const fetchAllProducts = async () => {
 
 export const fetchProductById = async (productId) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/products/${productId}`);
+    const response = await fetch(`${API_BASE_URL}/${productId}`);
     if (!response.ok) {
       throw new Error(`Error fetching product: ${response.statusText}`);
     }
+
     return await response.json();
   } catch (error) {
     console.error(error);
+    throw error;
+  }
+};
+
+export const createNewProduct = async (newProduct) => {
+  // Validación
+  if (!newProduct.title || !newProduct.price || !newProduct.category) {
+    throw new Error("Missing required fields: title, price, or category");
+  }
+
+  const product = {
+    ...newProduct,
+    description: "Nuevo producto",
+    image: "http://example.com",
+  };
+
+  try {
+    const response = await fetch(API_BASE_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(product),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error fetching product: ${response.statusText}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error in createNewProduct", error.message);
     throw error;
   }
 };

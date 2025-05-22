@@ -12,7 +12,7 @@ const router = express.Router();
 router
   .get("/", getAllProducts)
   .get("/:productId", getOneProduct)
-  .post("/:productTitle", createOneProduct)
+  .post("/", createOneProduct)
   .patch("/:productId", updateOneProduct)
   .delete("/:productId", deleteProduct);
 
