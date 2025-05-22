@@ -42,13 +42,9 @@ export const getOneProduct = async (req, res) => {
 
     res.send({ status: "OK", data: product });
   } catch (error) {
-    console.error("Error in getOneProduct:", error.message);
-    res.status(500).send({
-      status: "FAILED",
-      data: {
-        error: "Internal server error",
-      },
-    });
+    res
+      .status(error?.status || 500)
+      .send({ status: "FAILED", data: { error: error?.message || error } });
   }
 };
 
@@ -69,11 +65,15 @@ export const createOneProduct = async (req, res) => {
     };
 
     const createdProduct = await createNewProduct(newProduct);
-    res
-      .status(201)
-      .send({ status: "OK", data: createdProduct, message: "Product created" });
+    res.status(201).send({
+      status: "OK",
+      data: createdProduct,
+      message: "Product created correctly",
+    });
   } catch (error) {
-    console.error(error);
+    res
+      .status(error?.status || 500)
+      .send({ status: "FAILED", data: { error: error?.message || error } });
   }
 };
 
@@ -96,7 +96,6 @@ export const deleteOneProduct = async (req, res) => {
       message: result.message,
     });
   } catch (error) {
-    console.error("Error in deleteOneProduct:", error.message);
     res
       .status(error?.status || 500)
       .send({ status: "FAILED", data: { error: error?.message || error } });
