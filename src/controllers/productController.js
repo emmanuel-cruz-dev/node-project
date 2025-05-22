@@ -1,4 +1,7 @@
+import { getProductsService } from "../services/productServices.js";
+
 export const getAllProducts = (req, res) => {
+  const allProducts = getProductsService();
   res.send("Get all products");
 };
 
