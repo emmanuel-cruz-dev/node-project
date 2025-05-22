@@ -39,10 +39,6 @@ export const createOneProduct = async (req, res) => {
   }
 };
 
-export const updateOneProduct = (req, res) => {
-  res.send(`Update product ${req.params.productId}`);
-};
-
 export const deleteProduct = (req, res) => {
   res.send(`Delete product ${req.params.productId}`);
 };
