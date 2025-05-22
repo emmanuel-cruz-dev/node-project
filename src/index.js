@@ -7,10 +7,13 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use("/api/products", router);
 
+app.get("/", (req, res) => {
+  res.send(`
+    <h1>Home</h1>
+    <p>Hola mundo!</p>
+    `);
+});
+
 app.listen(PORT, () => {
   console.log(`🚀 Server listening on port http://localhost:${PORT}`);
 });
-
-// fetch("https://fakestoreapi.com/products")
-//   .then((data) => data.json())
-//   .then((res) => console.log(res));

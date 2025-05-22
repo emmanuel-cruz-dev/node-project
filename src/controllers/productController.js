@@ -1,8 +1,8 @@
-import { getProductsService } from "../services/productServices.js";
+import { fetchAllProducts } from "../services/apiService.js";
 
-export const getAllProducts = (req, res) => {
-  const allProducts = getProductsService();
-  res.send("Get all products");
+export const getAllProducts = async (req, res) => {
+  const products = await fetchAllProducts();
+  res.send({ status: "OK", data: products });
 };
 
 export const getOneProduct = (req, res) => {
