@@ -1,5 +1,6 @@
 import {
   createNewProduct,
+  deleteProductById,
   fetchAllProducts,
   fetchProductById,
 } from "../services/apiService.js";
@@ -76,13 +77,22 @@ export const createOneProduct = async (req, res) => {
   }
 };
 
-export const deleteProduct = async (req, res) => {
-  const products = await fetchAllProducts();
+export const deleteOneProduct = async (req, res) => {
   const { productId } = req.params;
-  const productIndex = products.findIndex(
-    (product) => product.id === productId
-  );
 
-  products.splice(productIndex, 1);
-  res.send(`Delete product ${productId}`);
+  if (!productId) {
+    res.status(400).send({
+      status: "FAILED",
+      data: { error: "Parameter 'productId' is required" },
+    });
+  }
+
+  try {
+    deleteProductById(productId);
+    res.status(204).send({ status: "OK" });
+  } catch (error) {
+    res
+      .status(error?.status || 500)
+      .send({ status: "FAILED", data: { error: error?.message || error } });
+  }
 };

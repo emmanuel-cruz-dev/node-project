@@ -57,3 +57,7 @@ export const createNewProduct = async (newProduct) => {
     throw error;
   }
 };
+
+export const deleteProductById = (productId) => {
+  return;
+};

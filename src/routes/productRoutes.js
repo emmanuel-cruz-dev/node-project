@@ -3,7 +3,7 @@ import {
   getAllProducts,
   getOneProduct,
   createOneProduct,
-  deleteProduct,
+  deleteOneProduct,
 } from "../controllers/productController.js";
 
 const router = express.Router();
@@ -12,6 +12,6 @@ router
   .get("/", getAllProducts)
   .get("/:productId", getOneProduct)
   .post("/", createOneProduct)
-  .delete("/:productId", deleteProduct);
+  .delete("/:productId", deleteOneProduct);
 
 export default router;
