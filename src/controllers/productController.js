@@ -16,8 +16,39 @@ export const getAllProducts = async (req, res) => {
 };
 
 export const getOneProduct = async (req, res) => {
-  const productById = await fetchProductById(req.params.productId);
-  res.send({ status: "OK", data: productById });
+  const { productId } = req.params;
+
+  if (!productId) {
+    return res.status(400).send({
+      status: "FAILED",
+      data: {
+        error: "Product ID is required",
+      },
+    });
+  }
+
+  try {
+    const product = await fetchProductById(productId);
+
+    if (!product) {
+      return res.status(404).send({
+        status: "FAILED",
+        data: {
+          error: `Product with ID ${productId} not found`,
+        },
+      });
+    }
+
+    res.send({ status: "OK", data: product });
+  } catch (error) {
+    console.error("Error in getOneProduct:", error.message);
+    res.status(500).send({
+      status: "FAILED",
+      data: {
+        error: "Internal server error",
+      },
+    });
+  }
 };
 
 export const createOneProduct = async (req, res) => {

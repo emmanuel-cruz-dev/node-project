@@ -23,7 +23,7 @@ export const fetchProductById = async (productId) => {
 
     return await response.json();
   } catch (error) {
-    console.error(error);
+    console.error("Error in fetchProductById:", error.message);
     throw error;
   }
 };
