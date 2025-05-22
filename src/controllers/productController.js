@@ -1,12 +1,13 @@
-import { fetchAllProducts } from "../services/apiService.js";
+import { fetchAllProducts, fetchProductById } from "../services/apiService.js";
 
 export const getAllProducts = async (req, res) => {
   const products = await fetchAllProducts();
   res.send({ status: "OK", data: products });
 };
 
-export const getOneProduct = (req, res) => {
-  res.send(`Get product ${req.params.productId}`);
+export const getOneProduct = async (req, res) => {
+  const productById = await fetchProductById(req.params.productId);
+  res.send({ status: "OK", data: productById });
 };
 
 export const createOneProduct = (req, res) => {
