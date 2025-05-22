@@ -2,7 +2,7 @@
 GET http://localhost:3000/api/products
 
 ### Obtener producto por id
-GET http://localhost:3000/api/products/21
+GET http://localhost:3000/api/products/1
 
 ### Crear nuevo producto
 POST http://localhost:3000/api/products
@@ -13,3 +13,6 @@ Content-Type: application/json
   "price": 0.1,
   "category": "men's clothing"
 }
+
+### Eliminar producto por id
+DELETE http://localhost:3000/api/products/1

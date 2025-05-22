@@ -48,7 +48,7 @@ export const createNewProduct = async (newProduct) => {
     });
 
     if (!response.ok) {
-      throw new Error(`Error fetching product: ${response.statusText}`);
+      throw new Error(`Error creating product: ${response.statusText}`);
     }
 
     return await response.json();
@@ -58,6 +58,23 @@ export const createNewProduct = async (newProduct) => {
   }
 };
 
-export const deleteProductById = (productId) => {
-  return;
+export const deleteProductById = async (productId) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/${productId}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error deleting product: ${response.statusText}`);
+    }
+
+    return {
+      status: "SUCCESS",
+      data: response,
+      message: "Product deleted successfully",
+    };
+  } catch (error) {
+    console.error("Error in deleteProductById", error.message);
+    throw error;
+  }
 };

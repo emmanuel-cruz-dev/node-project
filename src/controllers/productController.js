@@ -83,14 +83,19 @@ export const deleteOneProduct = async (req, res) => {
   if (!productId) {
     res.status(400).send({
       status: "FAILED",
-      data: { error: "Parameter 'productId' is required" },
+      data: { error: "Product ID is required" },
     });
   }
 
   try {
-    deleteProductById(productId);
-    res.status(204).send({ status: "OK" });
+    const result = await deleteProductById(productId);
+
+    res.status(204).send({
+      status: "OK",
+      data: result,
+    });
   } catch (error) {
+    console.error("Error in deleteOneProduct:", error.message);
     res
       .status(error?.status || 500)
       .send({ status: "FAILED", data: { error: error?.message || error } });
