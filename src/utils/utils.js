@@ -1,4 +1,8 @@
-import { fetchAllProducts, fetchProductById } from "../services/apiService.js";
+import {
+  createNewProduct,
+  fetchAllProducts,
+  fetchProductById,
+} from "../services/apiService.js";
 
 export async function handleRequest(method, endpoint, data) {
   try {
@@ -17,10 +21,16 @@ export async function handleRequest(method, endpoint, data) {
         break;
 
       case "POST":
-        // Lógica para POST (si lo requieren)
+        if (endpoint === "products" && data.length >= 3) {
+          const [title, price, category] = data;
+          const newProduct = { title, price: parseFloat(price), category };
+          const createdProduct = await createNewProduct(newProduct);
+          console.log("Producto creado correctamente:", createdProduct);
+        } else {
+          console.log("Falta alguno de los datos (title, price, category)");
+        }
         break;
 
-      case "PUT":
       case "DELETE":
         // Lógica para PUT/DELETE (si lo requieren)
         break;
