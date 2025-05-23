@@ -1,5 +1,6 @@
 import express from "express";
 import router from "./routes/productRoutes.js";
+import { handleRequest } from "./utils/utils.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,3 +26,5 @@ const endpoint = args[1];
 
 console.log("Método:", method);
 console.log("Endpoint:", endpoint);
+
+handleRequest(method, endpoint);

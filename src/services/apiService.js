@@ -9,7 +9,7 @@ export const fetchAllProducts = async () => {
 
     return await response.json();
   } catch (error) {
-    console.error(error);
+    console.error("Error in fetchAllProducts", error.message);
     throw error;
   }
 };
