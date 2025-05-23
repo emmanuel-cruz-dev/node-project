@@ -1,5 +1,6 @@
 import {
   createNewProduct,
+  deleteProductById,
   fetchAllProducts,
   fetchProductById,
 } from "../services/apiService.js";
@@ -32,11 +33,17 @@ export async function handleRequest(method, endpoint, data) {
         break;
 
       case "DELETE":
-        // Lógica para PUT/DELETE (si lo requieren)
+        if (endpoint.startsWith("products/")) {
+          const productId = endpoint.split("/")[1];
+          const product = await deleteProductById(productId);
+          console.log("Producto eliminado correctamente:", product);
+        } else {
+          console.log("Error al eliminar el producto");
+        }
         break;
 
       default:
-        console.log("Método no soportado");
+        console.log("Método no soportado. Usa GET, POST o DELETE");
     }
   } catch (error) {
     console.error("Error:", error.message);
