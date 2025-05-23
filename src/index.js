@@ -9,8 +9,8 @@ app.use("/api/products", router);
 
 app.get("/", (req, res) => {
   res.send(`
-    <h1>Home</h1>
-    <p>Hola mundo! Visita la API en este <a href="http://localhost:3000/api/products/">link</a>.</p>
+    <h1>Hola mundo!</h1>
+    <p>Visita la API de productos en este <a href="http://localhost:3000/api/products/">link</a>.</p>
     `);
 });
 
