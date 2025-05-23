@@ -15,5 +15,13 @@ app.get("/", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server listening on port http://localhost:${PORT}`);
+  // console.log(`🚀 Server listening on port http://localhost:${PORT}`);
 });
+
+const args = process.argv.slice(2);
+
+const method = args[0];
+const endpoint = args[1];
+
+console.log("Método:", method);
+console.log("Endpoint:", endpoint);
