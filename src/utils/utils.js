@@ -1,6 +1,6 @@
 import { fetchAllProducts, fetchProductById } from "../services/apiService.js";
 
-export async function handleRequest(method, endpoint) {
+export async function handleRequest(method, endpoint, data) {
   try {
     switch (method) {
       case "GET":
