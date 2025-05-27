@@ -69,8 +69,11 @@ Ejecuta los comandos desde la raíz del proyecto:
 ```
 
 ## 🛠️ Tecnologías
-- Node.js: Entorno de ejecución.  
-- Express: Framework para el servidor web.  
-- Fetch API: Para peticiones HTTP a FakeStore API (sin Axios).  
-- Nodemon: Recarga automática en desarrollo.  
-- ES Modules: Uso de import/export (gracias a "type": "module").
+- **Node.js**: Entorno de ejecución.  
+- **Express**: Framework para el servidor web.  
+- **Fetch API**: Para peticiones HTTP a FakeStore API (sin Axios).  
+- **Nodemon**: Recarga automática en desarrollo.  
+- **ES Modules**: Uso de import/export (gracias a "type": "module").
+
+## 🌐 API Utilizada
+Este proyecto utiliza [FakeStore](https://fakestoreapi.com) para obtener y manejar una lista de productos.
